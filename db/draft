@@ -1,0 +1,39 @@
+-------------
+schools
+-------------
+name
+
+	-------------
+	sections
+	-------------
+	name
+	school_id
+
+		-------------
+		users
+		-------------
+		name
+		img_src
+		role (instructor, student, admin)
+		password
+		password_confirmation
+		section_id
+
+			-------------
+			user_stats
+			-------------
+			user_id
+			stat_id
+
+		-------------
+		game_stats
+		-------------
+		answer (right, wrong, skipped)
+		game_id
+		student_id
+
+-------------
+games
+------------
+name
+description
