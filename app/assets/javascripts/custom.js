@@ -2,8 +2,27 @@ $(document).ready(function() {
 	var total = 0;
 	var numRight = 0;
 
+	function User(firstName, photo) {
+		this.firstName = firstName;
+		this.photo = photo + ".jpg";
+	}
+
+	var correctStu = new User("Walt", "walt-disney");
+	var charlesDarwin = new User("Charles", "charles-darwin");
+	var harlandDavidSanders = new User("Harlend", "col-harland-david-sanders");
+	var harrisonFord = new User("Harrison", "harrison-ford");
+	var jayZ = new User("Shawn", "jay-z");
+	var jkRowling = new User("Joanne", "jk-rowling");
+	var studentsArray = [
+		charlesDarwin,
+		harlandDavidSanders,
+		harrisonFord,
+		jayZ,
+		jkRowling
+	]
+
 	$(".practice-btn").click(function() {
-		$("#classes").hide();
+		$("#sections").hide();
 		$("#gamezone").show();
 		updateHeader("Famous People");
 		displayNextQuestion();
@@ -12,7 +31,7 @@ $(document).ready(function() {
 	$("#gamezone").on("click", ".option", function() {
 		var button = $(this);
 
-		if (button.text() == "Walt" || button.text() == "True") {
+		if (button.text() == correctStu.firstName || button.text() == "True") {
 			displayRightButton(button);
 			disableButton(button);
 			increaseTotal();
@@ -62,13 +81,12 @@ $(document).ready(function() {
 		var firstCol = createElem("div", "col-sm-6");
 		var secondCol = createElem("div", "col-sm-6");
 		var directionsContainer = createElem("p");
-		var randomPerson = "Danelson";
-		var correctPerson = "Walt";
-		var optionsArray = [randomPerson, correctPerson];
-		var directions = "Directions: Is this person Walt?";
+		var dummyStudent = randStudent(studentsArray).firstName;
+		var optionsArray = [dummyStudent, correctStu];
+		var directions = "Directions: Is this person " + correctStu.firstName + "?";
 										//  + optionsArray[randomNum(0, 1)] + "?";
-		var firstOption = createOption("primary", "True");
-		var secondOption = createOption("primary", "False");
+		var firstOption = createOption("True");
+		var secondOption = createOption("False");
 
 		row.append(firstCol, secondCol);
 		firstCol.append(createImage());
@@ -110,10 +128,10 @@ $(document).ready(function() {
 		var secondCol = createElem("div", "col-sm-6");
 		var directionsContainer = createElem("p");
 		var directions = "Directions: Click the correct name."
-		var firstOption = createOption("primary", "Walt");
-		var secondOption = createOption("primary", "Elon");
-		var thirdOption = createOption("primary", "Steve");
-		var fourthOption = createOption("primary", "Danelson");
+		var firstOption = createOption(correctStu.firstName);
+		var secondOption = createOption(randStudent(studentsArray).firstName);
+		var thirdOption = createOption(randStudent(studentsArray).firstName);
+		var fourthOption = createOption(randStudent(studentsArray).firstName);
 
 		row.append(firstCol, secondCol);
 		firstCol.append(createImage());
@@ -128,33 +146,64 @@ $(document).ready(function() {
 		gamezone.append(row);
 	}
 
-	function updateHeader(className) {
-		$(".starter-template h1").html("Class: " + className);
+	function randStudent(array) {
+		var num = array.length - 1;
 
+		return array[randomNum(0, num)];
+	}
+
+	function randStudentImgSrc(array) {
+		var num = array.length - 1;
+
+		return array[randomNum(0, num)].photo;
+	}
+
+	function updateHeader(className) {
+		$("#header h1").html(className);
+		$("#header .card-text:first").hide();
+
+		createScoreCard();
+		displayStartingScore();
+	}
+
+	function displayStartingScore() {
 		var numCorrect = createElem("span", null, "num-correct");
 		var totalAttempts = createElem("span", null, "total-attempts");
 
-		$(".starter-template .lead").html("Score: ");
-		$(".starter-template .lead").append(numCorrect, "/", totalAttempts);
+		$("#header .card-text:last").html("Score: ");
+		$("#header .card-text:last").append(numCorrect, "/", totalAttempts);
 		numCorrect.html(numRight);
 		totalAttempts.html(total);
 	}
 
-	function createOption(type, text) {
+	function createScoreCard() {
+		var card = createElem("div", "card card-outline-primary text-xs-center");
+		var cardBlock = createElem("div", "card-block");
+		var cardText = createElem("p", "card-text");
+
+		card.append(cardBlock);
+		cardBlock.append(cardText);
+		$("#header").append(card);
+	}
+
+	function createOption(text) {
 		var button = createElem(
 			"button",
-			"btn btn-" + type + " btn-lg btn-block option"
+			"btn btn-primary btn-block option"
 		);
 
 		button.text(text);
 
-		return button
+		return button;
 	}
 
 	function createImage() {
 		var image = $("<img class='img-fluid' />")
 
-		image.attr("src", "assets/images/famous-people/walt-disney.jpg");
+		image.attr(
+			"src",
+			"assets/images/famous-people/" + randStudentImgSrc(studentsArray)
+		);
 
 		return image;
 	}
