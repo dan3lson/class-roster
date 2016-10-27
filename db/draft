@@ -12,18 +12,25 @@ name
 		-------------
 		users
 		-------------
-		name
-		img_src
+		first_name
+		last_name
+		photo (TBD: Do student users need to be created or just their photos accessed?)
 		role (instructor, student, admin)
 		password
 		password_confirmation
 		section_id
 
 			-------------
+			photos
+			-------------
+			TBD: Does a photo belong to a section?
+			TBD: Does a photo belong to a user?
+
+			-------------
 			user_stats
 			-------------
 			user_id
-			stat_id
+			game_stat_id
 
 		-------------
 		game_stats
