@@ -21,12 +21,6 @@ name
 		section_id
 
 			-------------
-			photos
-			-------------
-			TBD: Does a photo belong to a section?
-			TBD: Does a photo belong to a user?
-
-			-------------
 			user_stats
 			-------------
 			user_id
