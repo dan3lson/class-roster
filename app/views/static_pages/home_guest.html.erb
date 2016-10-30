@@ -18,7 +18,9 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 69%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -29,7 +31,9 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 3%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -40,7 +44,9 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 23%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 	</div>
@@ -53,7 +59,9 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 9%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -64,7 +72,9 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 99%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 		<div class="col-sm-4">
@@ -75,9 +85,22 @@
 					<br>
 					<i class="fa fa-line-chart"></i> Mastery: 39%
 				</p>
-				<button type="button" class="btn btn-primary practice-btn">Practice</button>
+				<%= button_tag("Practice",
+					type:"button",
+					class: "btn btn-primary practice-btn") %>
 			</div>
 		</div>
 	</div>
 </section>
-<section id="gamezone"></section>
+<section id="gamezone">
+	<div class="row">
+		<div class="col-sm-6">
+			<% @students.each do |s| %>
+				<%= image_tag("famous-people/#{s.photo}",
+					class: "img-fluid",
+					alt: "#{s.first_name} #{s.last_name}") %>
+			<% end %>
+		</div>
+		<div class="col-sm-6"></div>
+	</div>
+</section>

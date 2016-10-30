@@ -1,0 +1,197 @@
+$(document).ready(function() {
+	var total = 0;
+	var numRight = 0;
+	var correctStudent = "";
+
+	$(".practice-btn").click(function() {
+		var $btn = $(this);
+		var sectionName = $btn.siblings("h3").text();
+
+		$("#sections").hide();
+		$("#gamezone").show();
+
+		updateHeader(sectionName);
+		playRound();
+	});
+
+	$("#gamezone").on("click", ".option", function() {
+		var button = $(this);
+
+		if (button.text() == partialName(correctStudent)) {
+			displayRightButton(button);
+			disableButton(button);
+			increaseTotal();
+			increaseNumRight();
+			$("#num-correct").html(numRight);
+			$("#total-attempts").html(total);
+
+			$.each(button.siblings(), function() {
+				disableButton($(this));
+			});
+
+			setTimeout(playRound, 400);
+		} else {
+			disableButton(button);
+			displayWrongButton(button);
+			increaseTotal();
+			$("#total-attempts").html(total);
+		}
+	});
+
+	function playRound() {
+		getStudents().done(function(response) {
+			correctStudent = response.correct_student;
+			var students = response.students;
+
+			displayNextQuestion(students);
+		});
+	}
+
+	function getStudents() {
+		var URL = "/students";
+
+		return $.get(URL, function() {}, "json");
+	}
+
+	function displayNextQuestion(studentsArray) {
+		$("#gamezone .col-sm-6:last").empty();
+
+		createMultipleChoice(studentsArray);
+	}
+
+	function increaseTotal() {
+		total += 1;
+	}
+
+	function increaseNumRight() {
+		numRight += 1;
+	}
+
+	function displayWrongButton(button) {
+		button.removeClass("btn-primary").addClass("btn-danger");
+		button.append(" &#10006;");
+	}
+
+	function displayRightButton(button) {
+		button.removeClass("btn-primary").addClass("btn-success");
+		button.append(" &#10004;");
+	}
+
+	function disableButton(button) {
+		button.prop("disabled", true);
+	}
+
+	function createMultipleChoice(studentsArray) {
+		var $gamezone = $("#gamezone");
+		var $secondCol = $gamezone.find(".col-sm-6:last");
+		var firstOption = createOption(partialName(correctStudent));
+		var secondOption = createOption(partialName(randStudent(studentsArray)));
+		var thirdOption = createOption(partialName(randStudent(studentsArray)));
+		var fourthOption = createOption(partialName(randStudent(studentsArray)));
+		var optionsArray = [
+			firstOption,
+			secondOption,
+			thirdOption,
+			fourthOption
+		];
+		var shuffledOptions = shuffleArray(optionsArray);
+		var $correctstudentImage = $gamezone.find(
+			"img[alt='" + fullName(correctStudent) + "']"
+		);
+
+		$gamezone.find("img").hide();
+		$correctstudentImage.fadeIn("slow");
+		$secondCol.append(shuffledOptions);
+	}
+
+	function partialName(user) {
+		return user.first_name + " " + user.last_name[0] + ".";
+	}
+
+	function fullName(user) {
+		return user.first_name + " " + user.last_name;
+	}
+
+	function randStudent(array) {
+		var num = array.length - 1;
+
+		return array[randomNum(0, num)];
+	}
+
+	function randStudentImgSrc(array) {
+		var num = array.length - 1;
+
+		return array[randomNum(0, num)].photo;
+	}
+
+	function updateHeader(className) {
+		$("#header h1").html(className);
+		$("#header .card-text:first").hide();
+
+		createScoreCard();
+		displayStartingScore();
+	}
+
+	function displayStartingScore() {
+		var numCorrect = createElem("span", null, "num-correct");
+		var totalAttempts = createElem("span", null, "total-attempts");
+
+		$("#header .card-text:last").html("Score: ");
+		$("#header .card-text:last").append(numCorrect, "/", totalAttempts);
+		numCorrect.html(numRight);
+		totalAttempts.html(total);
+	}
+
+	function createScoreCard() {
+		var card = createElem("div", "card card-outline-primary text-xs-center");
+		var cardBlock = createElem("div", "card-block");
+		var cardText = createElem("p", "card-text");
+
+		card.append(cardBlock);
+		cardBlock.append(cardText);
+		$("#header").append(card);
+	}
+
+	function createOption(text) {
+		var $button = createElem(
+			"button",
+			"btn btn-secondary btn-lg btn-block option"
+		);
+
+		$button.text(text);
+
+		return $button;
+	}
+
+	function createImage(studentsArray) {
+		var $image = $("<img class='img-fluid' />")
+		var stu = randStudentImgSrc(studentsArray);
+		$("#stu-image").data("path");
+		return $image;
+	}
+
+	function createElem(elem, elemClass, elemId) {
+		elemClass = elemClass ||  null;
+		elemId = elemId || null;
+
+		return $("<" + elem + ">", { class: elemClass, id: elemId });
+	}
+
+	function randomNum(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+	}
+
+	function shuffleArray(array) {
+		var m = array.length, t, i;
+		// While there remain elements to shuffle…
+		while (m) {
+			// Pick a remaining element…
+			i = Math.floor(Math.random() * m--);
+			// And swap it with the current element.
+			t = array[m];
+			array[m] = array[i];
+			array[i] = t;
+		}
+		return array;
+	};
+});
