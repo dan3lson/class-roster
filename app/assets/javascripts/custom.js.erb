@@ -1,6 +1,7 @@
 $(document).ready(function() {
-	var total = 0;
+	var numWrong = 0;
 	var numRight = 0;
+	var percentCorrect = 0;
 	var correctStudent = "";
 
 	$(".practice-btn").click(function() {
@@ -19,22 +20,20 @@ $(document).ready(function() {
 
 		if (button.text() == partialName(correctStudent)) {
 			displayRightButton(button);
-			disableButton(button);
-			increaseTotal();
 			increaseNumRight();
-			$("#num-correct").html(numRight);
-			$("#total-attempts").html(total);
+			disableButton(button);
+			disableAllButtons(button);
 
-			$.each(button.siblings(), function() {
-				disableButton($(this));
-			});
+			$("#num-correct").html(numRight);
+			$("#mastery-percentage").html(mastery(numWrong, numRight));
 
 			setTimeout(playRound, 400);
 		} else {
 			disableButton(button);
 			displayWrongButton(button);
-			increaseTotal();
-			$("#total-attempts").html(total);
+			increaseNumWrong();
+			$("#num-wrong").html(numWrong);
+			$("#mastery-percentage").html(mastery(numWrong, numRight));
 		}
 	});
 
@@ -59,8 +58,14 @@ $(document).ready(function() {
 		createMultipleChoice(studentsArray);
 	}
 
-	function increaseTotal() {
-		total += 1;
+	function mastery(numWrong, numRight) {
+		var total = numWrong + numRight;
+
+		return Math.floor((numRight / total) * 100);
+	}
+
+	function increaseNumWrong() {
+		numWrong += 1;
 	}
 
 	function increaseNumRight() {
@@ -68,13 +73,19 @@ $(document).ready(function() {
 	}
 
 	function displayWrongButton(button) {
-		button.removeClass("btn-primary").addClass("btn-danger");
+		button.removeClass("btn-outline-primary").addClass("btn-danger");
 		button.append(" &#10006;");
 	}
 
 	function displayRightButton(button) {
-		button.removeClass("btn-primary").addClass("btn-success");
+		button.removeClass("btn-outline-primary").addClass("btn-success");
 		button.append(" &#10004;");
+	}
+
+	function disableAllButtons(button) {
+		$.each(button.siblings(), function() {
+			disableButton($(this));
+		});
 	}
 
 	function disableButton(button) {
@@ -126,36 +137,34 @@ $(document).ready(function() {
 
 	function updateHeader(className) {
 		$("#header h1").html(className);
-		$("#header .card-text:first").hide();
 
-		createScoreCard();
 		displayStartingScore();
 	}
 
 	function displayStartingScore() {
-		var numCorrect = createElem("span", null, "num-correct");
-		var totalAttempts = createElem("span", null, "total-attempts");
+		var $numCorrect = createElem("span", null, "num-correct");
+		var $numIncorrect = createElem("span", null, "num-wrong");
+		var $percentCorrect = createElem("span", null, "mastery-percentage");
+		var $headerText = $("#header .card-text");
 
-		$("#header .card-text:last").html("Score: ");
-		$("#header .card-text:last").append(numCorrect, "/", totalAttempts);
-		numCorrect.html(numRight);
-		totalAttempts.html(total);
-	}
-
-	function createScoreCard() {
-		var card = createElem("div", "card card-outline-primary text-xs-center");
-		var cardBlock = createElem("div", "card-block");
-		var cardText = createElem("p", "card-text");
-
-		card.append(cardBlock);
-		cardBlock.append(cardText);
-		$("#header").append(card);
+		$headerText.html("Score: ");
+		$headerText.append(
+			$numCorrect,
+			"&#10004; ",
+			$numIncorrect,
+			"&#10006; ",
+			$percentCorrect,
+			"&#37;"
+		);
+		$numCorrect.html(numRight);
+		$numIncorrect.html(numWrong);
+		$percentCorrect.html(percentCorrect);
 	}
 
 	function createOption(text) {
 		var $button = createElem(
 			"button",
-			"btn btn-secondary btn-lg btn-block option"
+			"btn btn-outline-primary btn-lg btn-block option"
 		);
 
 		$button.text(text);
@@ -183,12 +192,11 @@ $(document).ready(function() {
 
 	function shuffleArray(array) {
 		var m = array.length, t, i;
-		// While there remain elements to shuffle…
+
 		while (m) {
-			// Pick a remaining element…
 			i = Math.floor(Math.random() * m--);
-			// And swap it with the current element.
 			t = array[m];
+
 			array[m] = array[i];
 			array[i] = t;
 		}
