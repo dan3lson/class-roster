@@ -2,16 +2,17 @@ $(document).ready(function() {
 	var numWrong = 0;
 	var numRight = 0;
 	var percentCorrect = 0;
+	var section = "";
 	var correctStudent = "";
 
 	$(".practice-btn").click(function() {
 		var $btn = $(this);
-		var sectionName = $btn.siblings("h3").text();
+		section = $btn.siblings("h3").text();
 
 		$("#sections").hide();
 		$("#gamezone").show();
 
-		updateHeader(sectionName);
+		updateHeader(section);
 		playRound();
 	});
 
@@ -38,7 +39,7 @@ $(document).ready(function() {
 	});
 
 	function playRound() {
-		getStudents().done(function(response) {
+		getStudents(section).done(function(response) {
 			correctStudent = response.correct_student;
 			var students = response.students;
 
@@ -46,14 +47,15 @@ $(document).ready(function() {
 		});
 	}
 
-	function getStudents() {
-		var URL = "/students";
+	function getStudents(section) {
+		var URL = "/students?section=" + section;
 
 		return $.get(URL, function() {}, "json");
 	}
 
 	function displayNextQuestion(studentsArray) {
-		$("#gamezone .col-sm-6:last").empty();
+		var $secondColumn = $("#gamezone .col-sm-6:last");
+		$secondColumn.empty();
 
 		createMultipleChoice(studentsArray);
 	}
