@@ -224,6 +224,14 @@ yolanda_de_leon = User.new(
 	section: @six_trillin
 )
 
+roselyn_crisostomo = User.new(
+	first_name: "Roselyn",
+	last_name: "Crisostomo",
+	photo: "roselyn-crisostomo.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
 ehsa_six_trillin = [
 	amanda_rodriguez,
 	leonardo_pila,
