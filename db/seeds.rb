@@ -235,7 +235,8 @@ roselyn_crisostomo = User.new(
 ehsa_six_trillin = [
 	amanda_rodriguez,
 	leonardo_pila,
-	yolanda_de_leon
+	yolanda_de_leon,
+	roselyn_crisostomo
 ]
 
 ehsa_six_trillin.each do |person|
