@@ -1,7 +1,7 @@
 class UsersController < ActionController::Base
 	def students
 		@section = Section.find_by(name: params[:section])
-		@students = @section.users
+		@students = @section.nil? ? User.all_students : @section.users
 		@correct_student = @students.sample
 		@students = @students.where.not(id: @correct_student.id)
 

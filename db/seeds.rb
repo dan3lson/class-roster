@@ -3,6 +3,7 @@ Rails.logger.info "Creating Sections"
 Rails.logger.info "==============================================="
 
 @famous_people = Section.create!(name: "Famous People")
+@six_pietri = Section.create!(name: "6 Pietri")
 @six_trillin = Section.create!(name: "6 Trillin")
 
 Rails.logger.info "==============================================="
@@ -200,46 +201,314 @@ famous_people.each do |person|
 	end
 end
 
-amanda_rodriguez = User.new(
+amanda = User.new(
 	first_name: "Amanda",
-	last_name: "Rodriguez",
-	photo: "amanda-rodriguez.jpg",
+	photo: "amanda.jpg",
 	role: "student",
 	section: @six_trillin
 )
 
-leonardo_pila = User.new(
+alexis = User.new(
+	first_name: "Alexis",
+	photo: "alexis.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+christopher = User.new(
+	first_name: "Christopher",
+	photo: "christopher.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+christian = User.new(
+	first_name: "Christian",
+	photo: "christian.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+daniela = User.new(
+	first_name: "Daniela",
+	photo: "daniela.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+delvin = User.new(
+	first_name: "Delvin",
+	photo: "delvin.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+elijah = User.new(
+	first_name: "Elijah",
+	photo: "elijah.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+evelyn = User.new(
+	first_name: "Evelyn",
+	photo: "evelyn.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+ezekial = User.new(
+	first_name: "Ezekial",
+	photo: "ezekial.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+franklin = User.new(
+	first_name: "Franklin",
+	photo: "franklin.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+jorge = User.new(
+	first_name: "Jorge",
+	photo: "jorge.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+leonardo = User.new(
 	first_name: "Leonardo",
-	last_name: "Pila",
-	photo: "leonardo-pila.jpg",
+	photo: "leonardo.jpg",
 	role: "student",
 	section: @six_trillin
 )
 
-yolanda_de_leon = User.new(
-	first_name: "Yolanda",
-	last_name: "de Leon",
-	photo: "yolanda-de-leon.jpg",
+liyah = User.new(
+	first_name: "Liyah",
+	photo: "liyah.jpg",
 	role: "student",
 	section: @six_trillin
 )
 
-roselyn_crisostomo = User.new(
+nyah = User.new(
+	first_name: "Nyah",
+	photo: "nyah.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+olga = User.new(
+	first_name: "Olga",
+	photo: "olga.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+roselyn = User.new(
 	first_name: "Roselyn",
-	last_name: "Crisostomo",
-	photo: "roselyn-crisostomo.jpg",
+	photo: "roselyn.jpg",
+	role: "student",
+	section: @six_trillin
+)
+
+yolanda = User.new(
+	first_name: "Yolanda",
+	photo: "yolanda.jpg",
 	role: "student",
 	section: @six_trillin
 )
 
 ehsa_six_trillin = [
-	amanda_rodriguez,
-	leonardo_pila,
-	yolanda_de_leon,
-	roselyn_crisostomo
+	alexis,
+	amanda,
+	christian,
+	christopher,
+	daniela,
+	delvin,
+	elijah,
+	evelyn,
+	ezekial,
+	franklin,
+	jorge,
+	leonardo,
+	liyah,
+	nyah,
+	olga,
+	roselyn,
+	yolanda
 ]
 
 ehsa_six_trillin.each do |person|
+	if person.save
+		Rails.logger.info "#{person.first_name} saved."
+	else
+		Rails.logger.info "ERROR: #{person.first_name} not saved."
+	end
+end
+
+abraham = User.new(
+	first_name: "Abraham",
+	photo: "abraham.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+angel = User.new(
+	first_name: "Angel",
+	photo: "angel.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+ashlee = User.new(
+	first_name: "Ashlee",
+	photo: "ashlee.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+ashley = User.new(
+	first_name: "Ashley",
+	photo: "ashley.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+caitlin = User.new(
+	first_name: "Caitlin",
+	photo: "caitlin.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+dario = User.new(
+	first_name: "Dario",
+	photo: "dario.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+eileen = User.new(
+	first_name: "Eileen",
+	photo: "eileen.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+jaheim = User.new(
+	first_name: "Jaheim",
+	photo: "jaheim.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+jayden = User.new(
+	first_name: "Jayden",
+	photo: "jayden.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+leonardo = User.new(
+	first_name: "Leonardo",
+	photo: "leonardo.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+marcell = User.new(
+	first_name: "Marcell",
+	photo: "marcell.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+meghan = User.new(
+	first_name: "Meghan",
+	photo: "meghan.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+milton = User.new(
+	first_name: "Milton",
+	photo: "milton.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+monika = User.new(
+	first_name: "Monika",
+	photo: "monika.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+orion = User.new(
+	first_name: "Orion",
+	photo: "orion.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+richard = User.new(
+	first_name: "Richard",
+	photo: "richard.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+ronnie = User.new(
+	first_name: "Ronnie",
+	photo: "ronnie.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+shane = User.new(
+	first_name: "Shane",
+	photo: "shane.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+shaylynn = User.new(
+	first_name: "Shaylynn",
+	photo: "shaylynn.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+warren = User.new(
+	first_name: "Warren",
+	photo: "warren.jpg",
+	role: "student",
+	section: @six_pietri
+)
+
+ehsa_six_pietri = [
+	abraham,
+	angel,
+	ashlee,
+	ashley,
+	caitlin,
+	dario,
+	eileen,
+	jaheim,
+	leonardo,
+	marcell,
+	milton,
+	monika,
+	orion,
+	richard,
+	ronnie,
+	shaylynn,
+	warren
+]
+
+ehsa_six_pietri.each do |person|
 	if person.save
 		Rails.logger.info "#{person.first_name} saved."
 	else

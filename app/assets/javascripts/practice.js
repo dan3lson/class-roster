@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$("#gamezone").on("click", ".option", function() {
 		var button = $(this);
 
-		if (button.text() == partialName(correctStudent)) {
+		if (button.text() == correctStudent.first_name) {
 			displayRightButton(button);
 			increaseNumRight();
 			disableButton(button);
@@ -40,8 +40,8 @@ $(document).ready(function() {
 
 	function playRound() {
 		getStudents(section).done(function(response) {
-			correctStudent = response.correct_student;
 			var students = response.students;
+			correctStudent = response.correct_student;
 
 			displayNextQuestion(students);
 		});
@@ -97,10 +97,10 @@ $(document).ready(function() {
 	function createMultipleChoice(studentsArray) {
 		var $gamezone = $("#gamezone");
 		var $secondCol = $gamezone.find(".col-sm-6:last");
-		var firstOption = createOption(partialName(correctStudent));
-		var secondOption = createOption(partialName(randStudent(studentsArray)));
-		var thirdOption = createOption(partialName(randStudent(studentsArray)));
-		var fourthOption = createOption(partialName(randStudent(studentsArray)));
+		var firstOption = createOption(correctStudent.first_name);
+		var secondOption = createOption(randStudent(studentsArray).first_name);
+		var thirdOption = createOption(randStudent(studentsArray).first_name);
+		var fourthOption = createOption(randStudent(studentsArray).first_name);
 		var optionsArray = [
 			firstOption,
 			secondOption,
@@ -109,7 +109,7 @@ $(document).ready(function() {
 		];
 		var shuffledOptions = shuffleArray(optionsArray);
 		var $correctstudentImage = $gamezone.find(
-			"img[alt='" + fullName(correctStudent) + "']"
+			"img[alt='" + correctStudent.first_name + "']"
 		);
 
 		$gamezone.find("img").hide();
@@ -118,11 +118,9 @@ $(document).ready(function() {
 	}
 
 	function partialName(user) {
-		return user.first_name + " " + user.last_name[0] + ".";
-	}
+		var lastName = user.last_name ? user.last_name[0] + "." : "";
 
-	function fullName(user) {
-		return user.first_name + " " + user.last_name;
+		return user.first_name + " " + lastName;
 	}
 
 	function randStudent(array) {
