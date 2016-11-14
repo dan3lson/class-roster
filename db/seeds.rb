@@ -385,14 +385,14 @@ diego = User.create!(
 
 emilio = User.create!(
 	first_name: "Emilio",
-	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/milio.jpg",
+	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/emilio.jpg",
 	role: "student",
 	section: @five_van_pelt
 )
 
 evelyn = User.create!(
 	first_name: "Evelyn",
-	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/velyn.jpg",
+	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/evelyn.jpg",
 	role: "student",
 	section: @five_van_pelt
 )
@@ -469,7 +469,7 @@ nierra = User.create!(
 
 trevon = User.create!(
 	first_name: "Trevon",
-	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/revon.jpg",
+	photo: "#{ENV['EHSA']}/#{@five_van_pelt.folder_name}/trevon.jpg",
 	role: "student",
 	section: @five_van_pelt
 )
@@ -583,7 +583,7 @@ jorge = User.new(
 
 jose = User.new(
 	first_name: "Jose",
-	photo: "jose#{ENV['EHSA']}/#{@six_trillin.folder_name}/.jpg",
+	photo: "jose#{ENV['EHSA']}/#{@six_trillin.folder_name}/jose.jpg",
 	role: "student",
 	section: @six_trillin
 )
@@ -625,14 +625,14 @@ liyah = User.new(
 
 nyah = User.new(
 	first_name: "Nyah",
-	photo: "nyah#{ENV['EHSA']}/#{@six_trillin.folder_name}/.jpg",
+	photo: "nyah#{ENV['EHSA']}/#{@six_trillin.folder_name}/nyah.jpg",
 	role: "student",
 	section: @six_trillin
 )
 
 olga = User.new(
 	first_name: "Olga",
-	photo: "olga#{ENV['EHSA']}/#{@six_trillin.folder_name}/.jpg",
+	photo: "olga#{ENV['EHSA']}/#{@six_trillin.folder_name}/olga.jpg",
 	role: "student",
 	section: @six_trillin
 )
