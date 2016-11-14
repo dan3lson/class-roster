@@ -20,7 +20,7 @@
 		<div class="col-sm-6 text-xs-center">
 			<div id="<%= @section.name %>">
 				<% @section.users.each do |s| %>
-					<%= image_tag("#{@section.folder_name}/#{s.photo}",
+					<%= image_tag("#{s.photo}",
 						class: "rounded img-fluid",
 						alt: "#{s.first_name}") %>
 				<% end %>
