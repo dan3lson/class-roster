@@ -27,11 +27,12 @@ name
 			game_stat_id
 
 		-------------
-		game_stats
+		stats
 		-------------
-		answer (right, wrong, skipped)
-		game_id
+		correct
+		incorrect
 		student_id
+		player_id # when log in is available
 
 -------------
 games

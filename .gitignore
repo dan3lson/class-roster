@@ -13,5 +13,8 @@
 /tmp
 .DS_store
 .env
-/app/assets/images/six-trillin
-/app/assets/images/six-pietri
+/app/assets/images/5-van-pelt
+/app/assets/images/5-navarro
+/app/assets/images/6-pietri
+/app/assets/images/6-trillin
+/app/assets/images/6-wright

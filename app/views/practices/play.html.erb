@@ -1,0 +1,31 @@
+<section id="header">
+	<div class="card card-outline-secondary text-xs-center">
+		<div class="card-block">
+			<h1 class="card-title">
+				<%= @section.name %>
+			</h1>
+			<p class="card-text">
+				<span id="num-correct">0</span>
+				<i class="fa fa-check text-success"></i>
+				<span id="num-wrong">0</span>
+				<i class="fa fa-close text-danger"></i>
+				<span id="mastery-percentage">0</span>
+				<i class="fa fa-percent text-muted"></i>
+			</p>
+		</div>
+	</div>
+</section>
+<section id="gamezone" data-section-name="<%= @section.name %>">
+	<div class="row">
+		<div class="col-sm-6 text-xs-center">
+			<div id="<%= @section.name %>">
+				<% @section.users.each do |s| %>
+					<%= image_tag("#{@section.folder_name}/#{s.photo}",
+						class: "rounded img-fluid",
+						alt: "#{s.first_name}") %>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-sm-6"></div>
+	</div>
+</section>

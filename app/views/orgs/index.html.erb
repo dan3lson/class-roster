@@ -1,0 +1,6 @@
+<h1>Orgs</h1>
+<ul>
+	<% @orgs.each do |o| %>
+		<li><%= o.name %> (<%= o.num_sections %>)</li>
+	<% end %>
+</ul>

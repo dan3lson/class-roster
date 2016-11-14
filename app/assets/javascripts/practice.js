@@ -2,19 +2,12 @@ $(document).ready(function() {
 	var numWrong = 0;
 	var numRight = 0;
 	var percentCorrect = 0;
-	var section = "";
+	var section = $("#gamezone").data("section-name");
 	var correctStudent = "";
 
-	$(".practice-btn").click(function() {
-		var $btn = $(this);
-		section = $btn.siblings("h3").text();
-
-		$("#sections").hide();
-		$("#gamezone").show();
-
-		updateHeader(section);
+	if (section != null) {
 		playRound();
-	});
+	}
 
 	$("#gamezone").on("click", ".option", function() {
 		var button = $(this);
@@ -24,6 +17,7 @@ $(document).ready(function() {
 			increaseNumRight();
 			disableButton(button);
 			disableAllButtons(button);
+			scoreRound(correctStudent, "correct");
 
 			$("#num-correct").html(numRight);
 			$("#mastery-percentage").html(mastery(numWrong, numRight));
@@ -33,10 +27,29 @@ $(document).ready(function() {
 			disableButton(button);
 			displayWrongButton(button);
 			increaseNumWrong();
+			scoreRound(correctStudent, "incorrect");
+
 			$("#num-wrong").html(numWrong);
 			$("#mastery-percentage").html(mastery(numWrong, numRight));
 		}
 	});
+
+	function scoreRound(student, score) {
+		var data = {
+			"student_id": student.id,
+			"score": score
+		};
+
+		$.ajax({
+			type: "PATCH",
+			url: "/stat",
+			dataType: "json",
+			data: data
+		})
+		.done(function(response) {
+			console.log(response.results)
+		});
+	}
 
 	function playRound() {
 		getStudents(section).done(function(response) {
@@ -75,12 +88,12 @@ $(document).ready(function() {
 	}
 
 	function displayWrongButton(button) {
-		button.removeClass("btn-outline-primary").addClass("btn-danger");
+		button.removeClass("btn-primary").addClass("btn-danger");
 		button.append(" &#10006;");
 	}
 
 	function displayRightButton(button) {
-		button.removeClass("btn-outline-primary").addClass("btn-success");
+		button.removeClass("btn-primary").addClass("btn-success");
 		button.append(" &#10004;");
 	}
 
@@ -113,7 +126,7 @@ $(document).ready(function() {
 		);
 
 		$gamezone.find("img").hide();
-		$correctstudentImage.fadeIn("slow");
+		$correctstudentImage.show();
 		$secondCol.append(shuffledOptions);
 	}
 
@@ -135,36 +148,10 @@ $(document).ready(function() {
 		return array[randomNum(0, num)].photo;
 	}
 
-	function updateHeader(className) {
-		$("#header h1").html(className);
-
-		displayStartingScore();
-	}
-
-	function displayStartingScore() {
-		var $numCorrect = createElem("span", null, "num-correct");
-		var $numIncorrect = createElem("span", null, "num-wrong");
-		var $percentCorrect = createElem("span", null, "mastery-percentage");
-		var $headerText = $("#header .card-text");
-
-		$headerText.html("Score: ");
-		$headerText.append(
-			$numCorrect,
-			"&#10004; ",
-			$numIncorrect,
-			"&#10006; ",
-			$percentCorrect,
-			"&#37;"
-		);
-		$numCorrect.html(numRight);
-		$numIncorrect.html(numWrong);
-		$percentCorrect.html(percentCorrect);
-	}
-
 	function createOption(text) {
 		var $button = createElem(
 			"button",
-			"btn btn-outline-primary btn-lg btn-block option"
+			"btn btn-primary btn-lg btn-block option"
 		);
 
 		$button.text(text);

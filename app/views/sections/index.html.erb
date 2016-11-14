@@ -1,0 +1,20 @@
+<h1>My Sections</h1>
+<div class="row text-xs-center">
+	<% @sections.each do |s| %>
+		<div class="col-sm-4">
+			<div class="card card-block">
+				<h3 class="card-title"><%= s.name %></h3>
+				<h6 class="card-subtitle text-muted">
+					<%= s.org.name %>
+				</h6>
+				<br>
+				<p class="card-text">
+					<i class="fa fa-user"></i> Total: <%= s.total %>
+				</p>
+				<%= link_to "Practice", practice_path(section_id: s.id),
+					role: "button",
+					class: "btn btn-primary practice-btn" %>
+			</div>
+		</div>
+	<% end %>
+</div>

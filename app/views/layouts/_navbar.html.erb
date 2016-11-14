@@ -1,14 +1,29 @@
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-	<a class="navbar-brand" href="<%= root_path %>">Class Roster</a>
-	<ul class="nav navbar-nav">
-		<li class="nav-item active">
-			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="#">About</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="#">Contact</a>
-		</li>
-	</ul>
+<nav class="navbar navbar-fixed-top navbar-light bg-faded">
+	<h1 class="navbar-brand mb-0">Class Roster</h1>
+  <div class="nav navbar-nav">
+		<% if params[:action] == "home_guest" %>
+			<a class="nav-item nav-link active" href="#">
+				Home
+				<span class="sr-only">(current)</span>
+			</a>
+		<% else %>
+			<a class="nav-item nav-link" href="<%= root_path %>">Home</a>
+		<% end %>
+		<% if params[:controller] == "sections" %>
+			<a class="nav-item nav-link active" href="#">
+				My Sections
+				<span class="sr-only">(current)</span>
+			</a>
+		<% else %>
+			<a class="nav-item nav-link" href="<%= sections_path %>">My Sections</a>
+		<% end %>
+		<% if params[:action] == "about" %>
+			<a class="nav-item nav-link active" href="#">
+				About
+				<span class="sr-only">(current)</span>
+			</a>
+		<% else %>
+			<a class="nav-item nav-link" href="<%= about_path %>">About</a>
+		<% end %>
+  </div>
 </nav>

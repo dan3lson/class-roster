@@ -1,70 +1,14 @@
-<section id="header">
-	<div class="card card-inverse card-primary text-xs-center">
-		<div class="card-block">
-			<h1 class="card-title">Welcome to Class Roster!</h1>
-			<p class="card-text">
-				Choose a section to practice your students' names.
-			</p>
-		</div>
-	</div>
-</section>
-<section id="sections" class="text-xs-center">
-	<div class="row">
-		<div class="col-sm-4">
-			<div class="card card-block card-outline-primary">
-				<h3 class="card-title">All Students</h3>
-				<p class="card-text">
-					<i class="fa fa-user"></i> Students: <%= @user_count %>
-					<br>
-					<i class="fa fa-line-chart"></i> Mastery: 69%
-				</p>
-				<%= button_tag("Practice",
-					type:"button",
-					class: "btn btn-primary practice-btn") %>
-			</div>
-		</div>
-		<% @sections.each do |s| %>
-			<div class="col-sm-4">
-				<div class="card card-block">
-					<h3 class="card-title"><%= s.name %></h3>
-					<p class="card-text">
-						<i class="fa fa-user"></i> Students: <%= s.total %>
-						<br>
-						<i class="fa fa-line-chart"></i> Mastery: 69%
-					</p>
-					<%= button_tag("Practice",
-						type:"button",
-						class: "btn btn-primary practice-btn") %>
-				</div>
-			</div>
-		<% end %>
-	</div>
-</section>
-<section id="gamezone">
-	<div class="row">
-		<div class="col-sm-6">
-			<div id="Famous People">
-				<% @famous_students.each do |s| %>
-					<%= image_tag("famous-people/#{s.photo}",
-						class: "img-fluid",
-						alt: "#{s.first_name}") %>
-				<% end %>
-			</div>
-			<div id="6 Trillin">
-				<% @six_trillin.each do |s| %>
-					<%= image_tag("six-trillin/#{s.photo}",
-						class: "img-fluid",
-						alt: "#{s.first_name}") %>
-				<% end %>
-			</div>
-			<div id="6 Pietri">
-				<% @six_pietri.each do |s| %>
-					<%= image_tag("six-pietri/#{s.photo}",
-						class: "img-fluid",
-						alt: "#{s.first_name}") %>
-				<% end %>
-			</div>
-		</div>
-		<div class="col-sm-6"></div>
-	</div>
-</section>
+<div class="col-sm-8 offset-sm-2 text-xs-center">
+	<h1 class="display-1">Practice makes perfect.</h1>
+	<p class="lead">
+		Getting to know your students starts with learning their names.
+	</p>
+	<%= link_to "Start now",
+							org_path(Org.first),
+							class: "btn btn-primary",
+							role: "button" %>
+	<%= link_to "Learn more",
+							about_path,
+							class: "btn btn-secondary",
+							role: "button" %>
+</div>
